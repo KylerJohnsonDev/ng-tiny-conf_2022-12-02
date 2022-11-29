@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: 'customers', component: CustomersComponent, pathMatch: 'full' },
   {
     path: 'orders',
-    loadComponent: () => import('./routes/orders/orders.component').then(c => c.OrdersComponent)
+    loadChildren: () => import('./routes/orders/orders.component').then(m => m.OrdersModule)
   },
   { path: '', pathMatch: 'full', redirectTo: '/customers' },
 ];

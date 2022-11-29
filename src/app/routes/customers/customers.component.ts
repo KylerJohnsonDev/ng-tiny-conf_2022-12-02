@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-customers',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
-    <p>
-      customers works!
-    </p>
-  `,
-  styles: [
-  ]
+  templateUrl: './customers.component.html',
+  styleUrls: ['./customers.component.scss']
 })
 export class CustomersComponent {
 
 }
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [CustomersComponent]
+})
+export class CustomersModule {}
