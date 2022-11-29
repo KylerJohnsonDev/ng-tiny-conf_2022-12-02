@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &__header {
+      margin: 0;
+    }
+
+    &__nav-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: row;
+
+      &_link {
+        a {
+          color: white;
+          text-decoration: none;
+          padding: 1rem 0 1rem 1rem;
+
+        }
+        .active {
+          color: #FF4081;
+        }
+      }
+    }
+
+  }
+}
