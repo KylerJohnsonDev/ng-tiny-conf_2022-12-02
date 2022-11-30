@@ -2,14 +2,18 @@
   <h2 class="navbar__header">CRM</h2>
   <ul class="navbar__nav-list">
     <li class="navbar__nav-list_link">
-      <a routerLink="/customers" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Customers</a>
+      <a mat-flat-button color="primary" routerLink="/customers" routerLinkActive="active">
+        Customers
+      </a>
     </li>
     <li class="navbar__nav-list_link">
-      <a routerLink="/orders" routerLinkActive="active">
+      <a mat-flat-button color="primary" routerLink="/orders" routerLinkActive="active">
         Orders
       </a>
     </li>
   </ul>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+</main>
