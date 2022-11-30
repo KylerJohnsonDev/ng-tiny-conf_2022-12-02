@@ -7,6 +7,12 @@ import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button'
+import { ApolloModule } from 'apollo-angular';
+import { httpInterceptorProviders } from './interceptor';
+import { CustomersModule } from './routes/customers/customers.component';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -16,11 +22,18 @@ import { MatButtonModule } from '@angular/material/button'
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    CustomersModule,
+    GraphQLModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders,
+    HttpClientModule,
+    ApolloModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
