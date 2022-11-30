@@ -1,9 +1,7 @@
-export interface ApiResponse {
-  data: ResponsePayload;
-}
 
-export interface ResponsePayload {
-  customers: Customer[];
+
+export interface CustomerPayload {
+  customer: Customer[];
 }
 
 export interface Customer {

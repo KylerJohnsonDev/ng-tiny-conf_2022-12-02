@@ -1,4 +1,4 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
+import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { Customer } from "src/app/shared/models";
 import { customersEffectsActions } from "./customers.actions";
@@ -29,7 +29,7 @@ export const customersReducer = createReducer(
   on(customersEffectsActions.loadCustomers, (state) => ({ ...state, loading: true })),
 
   on(customersEffectsActions.loadCustomersSuccess, (state, { customers }) => {
-    return customersAdapter.setMany(customers, {
+    return customersAdapter.setAll(customers, {
       ...state,
       loading: false,
       error: null

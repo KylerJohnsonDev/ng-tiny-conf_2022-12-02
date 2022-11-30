@@ -22,9 +22,9 @@ export class CustomersEffects implements OnInitEffects {
         concatLatestFrom(() => this.store.select(customersSelectors.selectPaginationInfo)),
         switchMap(([, paginationInfo]) =>
         this.customersService.loadCustomers(paginationInfo).pipe(
-        map(customers => customersEffectsActions.loadCustomersSuccess({ customers })),
-            catchError(error => of(customersEffectsActions.loadCustomersFailure({ error }))))
-          ),
+          map(customers => customersEffectsActions.loadCustomersSuccess({ customers })),
+          catchError(error => of(customersEffectsActions.loadCustomersFailure({ error }))))
+        ),
     );
   });
 

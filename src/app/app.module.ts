@@ -13,6 +13,7 @@ import { CustomersModule } from './routes/customers/customers.component';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,9 @@ import { GraphQLModule } from './graphql.module';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
     EffectsModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule,
