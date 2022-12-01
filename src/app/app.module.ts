@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { ApolloModule } from 'apollo-angular';
 import { httpInterceptorProviders } from './interceptor';
-import { CustomersModule } from './routes/customers/customers.component';
+import { CustomersModule } from './pages/customers/customers.component';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';

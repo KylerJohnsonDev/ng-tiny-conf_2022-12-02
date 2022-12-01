@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomersComponent } from './routes/customers/customers.component';
+import { CustomersComponent } from './pages/customers/customers.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent, pathMatch: 'full' },
   {
     path: 'orders',
     loadChildren: () =>
-      import('./routes/orders/orders.component').then((m) => m.OrdersModule),
+      import('./pages/orders/orders.component').then((m) => m.OrdersModule),
   },
   { path: '', pathMatch: 'full', redirectTo: '/customers' },
 ];
