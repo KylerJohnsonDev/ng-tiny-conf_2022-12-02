@@ -1,7 +1,10 @@
-import { createEntityAdapter, EntityState } from "@ngrx/entity";
-import { createReducer, on } from "@ngrx/store";
-import { Customer } from "src/app/shared/models";
-import { customersEffectsActions, customersPageActions } from "./customers.actions";
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { Customer } from 'src/app/shared/models';
+import {
+  customersEffectsActions,
+  customersPageActions,
+} from './customers.actions';
 
 export const CUSTOMERS_FEATURE_KEY = 'Customers';
 
@@ -22,37 +25,43 @@ const initialState: CustomersState = customersAdapter.getInitialState({
   limit: 5,
   offset: 0,
   pageIndex: 0,
-  totalCount: 0
-})
+  totalCount: 0,
+});
 
 export const customersReducer = createReducer(
   initialState,
 
-  on(customersEffectsActions.loadCustomers, (state) => ({ ...state, loading: true })),
+  on(customersEffectsActions.loadCustomers, (state) => ({
+    ...state,
+    loading: true,
+  })),
 
   on(customersEffectsActions.loadCustomersSuccess, (state, { payload }) => {
     return customersAdapter.setAll(payload.customer, {
       ...state,
       totalCount: payload.customer_aggregate.aggregate.count,
       loading: false,
-      error: null
-    })
+      error: null,
+    });
   }),
 
   on(customersEffectsActions.loadCustomersFailure, (state, { error }) => ({
     ...state,
     error: error.message,
-    loading: false
+    loading: false,
   })),
 
-  on(customersPageActions.paginateCustomers, (state, { pageIndex, pageSize }) => {
-    const offset = state.limit * pageIndex;
-    return {
-      ...state,
-      loading: true,
-      pageIndex,
-      offset,
-      limit: pageSize
+  on(
+    customersPageActions.paginateCustomers,
+    (state, { pageIndex, pageSize }) => {
+      const offset = state.limit * pageIndex;
+      return {
+        ...state,
+        loading: true,
+        pageIndex,
+        offset,
+        limit: pageSize,
+      };
     }
-  })
-)
+  )
+);

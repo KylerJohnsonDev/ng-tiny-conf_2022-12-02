@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
 import { ApolloModule } from 'apollo-angular';
 import { httpInterceptorProviders } from './interceptor';
 import { CustomersModule } from './routes/customers/customers.component';
@@ -16,9 +16,7 @@ import { GraphQLModule } from './graphql.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,13 +29,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatToolbarModule,
     MatButtonModule,
     CustomersModule,
-    GraphQLModule
+    GraphQLModule,
   ],
-  providers: [
-    httpInterceptorProviders,
-    HttpClientModule,
-    ApolloModule,
-  ],
-  bootstrap: [AppComponent]
+  providers: [httpInterceptorProviders, HttpClientModule, ApolloModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

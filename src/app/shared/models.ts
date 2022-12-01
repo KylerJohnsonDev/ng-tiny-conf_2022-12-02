@@ -1,28 +1,28 @@
 export interface CustomerAggregate {
   aggregate: {
     count: number;
-  }
+  };
 }
 
 export interface CustomerPayload {
   customer: Customer[];
-  customer_aggregate: CustomerAggregate
+  customer_aggregate: CustomerAggregate;
 }
 
 export interface Customer {
-  id:         number;
+  id: number;
   first_name: string;
-  last_name:  string;
-  username:   string;
-  email:      string;
-  phone:      string;
-  orders:     Order[];
+  last_name: string;
+  username: string;
+  email: string;
+  phone: string;
+  orders: Order[];
 }
 
 export interface Order {
-  id:             number;
-  order_date:     string;
-  product:        string;
+  id: number;
+  order_date: string;
+  product: string;
   purchase_price: string;
   discount_price: string;
 }

@@ -1,21 +1,34 @@
-import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { HASURA_SECRET } from "./hasura-secret";
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
+  HttpRequest,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HASURA_SECRET } from './hasura-secret';
 
 @Injectable()
 export class HasuraInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const isHasuraRequest = req.url.startsWith('https://grateful-flamingo');
-    if(isHasuraRequest) {
-      const headers = new HttpHeaders().set('x-hasura-admin-secret', HASURA_SECRET)
-      const modReq = req.clone({ headers })
-      return next.handle(modReq)
+    if (isHasuraRequest) {
+      const headers = new HttpHeaders().set(
+        'x-hasura-admin-secret',
+        HASURA_SECRET
+      );
+      const modReq = req.clone({ headers });
+      return next.handle(modReq);
     }
     return next.handle(req);
   }
 }
 
 export const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: HasuraInterceptor, multi: true }
-]
+  { provide: HTTP_INTERCEPTORS, useClass: HasuraInterceptor, multi: true },
+];

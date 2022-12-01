@@ -1,37 +1,43 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { customersAdapter, CustomersState, CUSTOMERS_FEATURE_KEY } from "./customers.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  customersAdapter,
+  CustomersState,
+  CUSTOMERS_FEATURE_KEY,
+} from './customers.reducer';
 
-const selectCustomersFeature = createFeatureSelector<CustomersState>(CUSTOMERS_FEATURE_KEY);
+const selectCustomersFeature = createFeatureSelector<CustomersState>(
+  CUSTOMERS_FEATURE_KEY
+);
 
 const selectLimit = createSelector(
   selectCustomersFeature,
   (state) => state.limit
-)
+);
 
 const selectOffset = createSelector(
   selectCustomersFeature,
   (state) => state.offset
-)
+);
 
 const selectPageIndex = createSelector(
   selectCustomersFeature,
   (state) => state.pageIndex
-)
+);
 
 const selectTotalCount = createSelector(
   selectCustomersFeature,
   (state) => state.totalCount
-)
+);
 
 const selectLoading = createSelector(
   selectCustomersFeature,
   (state) => state.loading
-)
+);
 
 const selectError = createSelector(
   selectCustomersFeature,
   (state) => state.error
-)
+);
 
 const { selectAll } = customersAdapter.getSelectors(selectCustomersFeature);
 
@@ -39,7 +45,7 @@ const selectPaginationInfo = createSelector(
   selectLimit,
   selectOffset,
   (limit, offset) => ({ limit, offset })
-)
+);
 
 const selectState = createSelector(
   selectCustomersFeature,
@@ -53,10 +59,10 @@ const selectState = createSelector(
       offset,
       error,
       totalCount,
-      pageIndex
-    }
+      pageIndex,
+    };
   }
-)
+);
 
 export const customersSelectors = {
   selectState,
@@ -67,5 +73,5 @@ export const customersSelectors = {
   selectPageIndex,
   selectTotalCount,
   selectPaginationInfo,
-  selectCustomers: selectAll
-}
+  selectCustomers: selectAll,
+};

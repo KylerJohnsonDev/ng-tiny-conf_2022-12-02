@@ -5,21 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  styleUrls: ['./orders.component.scss'],
 })
-export class OrdersComponent {
+export class OrdersComponent {}
 
-}
-
-const routes: Routes = [
-  { path: '', component: OrdersComponent },
-]
+const routes: Routes = [{ path: '', component: OrdersComponent }];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   declarations: [OrdersComponent],
   exports: [OrdersComponent],
 })
