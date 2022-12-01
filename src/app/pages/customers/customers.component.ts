@@ -17,6 +17,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { customersPageActions } from './customers-feature-state/customers.actions';
 import { customersSelectors } from './customers-feature-state/customers.selectors';
 import { Customer } from 'src/app/shared/models';
+import { CustomersTableComponent } from './components/customers-table.component';
 
 export interface CustomersViewModel {
   customers: Customer[];
@@ -36,17 +37,6 @@ export interface CustomersViewModel {
 export class CustomersComponent {
   vm$: Observable<CustomersViewModel>;
 
-  displayedColumns = [
-    'id',
-    'first_name',
-    'last_name',
-    'username',
-    'email',
-    'phone',
-    'orders',
-  ];
-  pageSizeOptions = [5, 10, 20];
-
   constructor(private store: Store<CustomersState>) {
     this.vm$ = this.store.select(customersSelectors.selectState);
   }
@@ -61,11 +51,12 @@ export class CustomersComponent {
 
 @NgModule({
   imports: [
+    LetModule,
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
+    CustomersTableComponent,
     MatProgressSpinnerModule,
-    LetModule,
     StoreModule.forFeature(CUSTOMERS_FEATURE_KEY, customersReducer),
     EffectsModule.forFeature(CustomersEffects),
   ],
