@@ -13,6 +13,21 @@ const selectOffset = createSelector(
   (state) => state.offset
 )
 
+const selectPageIndex = createSelector(
+  selectCustomersFeature,
+  (state) => state.pageIndex
+)
+
+const selectTotalCount = createSelector(
+  selectCustomersFeature,
+  (state) => state.totalCount
+)
+
+const selectLoading = createSelector(
+  selectCustomersFeature,
+  (state) => state.loading
+)
+
 const selectError = createSelector(
   selectCustomersFeature,
   (state) => state.error
@@ -26,10 +41,31 @@ const selectPaginationInfo = createSelector(
   (limit, offset) => ({ limit, offset })
 )
 
+const selectState = createSelector(
+  selectCustomersFeature,
+  selectAll,
+  (state, customers) => {
+    const { loading, limit, offset, error, totalCount, pageIndex } = state;
+    return {
+      customers,
+      loading,
+      limit,
+      offset,
+      error,
+      totalCount,
+      pageIndex
+    }
+  }
+)
+
 export const customersSelectors = {
+  selectState,
   selectError,
   selectLimit,
   selectOffset,
+  selectLoading,
+  selectPageIndex,
+  selectTotalCount,
   selectPaginationInfo,
   selectCustomers: selectAll
 }

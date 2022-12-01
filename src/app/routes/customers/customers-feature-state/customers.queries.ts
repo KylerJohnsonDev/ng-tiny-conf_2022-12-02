@@ -18,5 +18,10 @@ export const LOAD_CUSTOMERS = gql`
         discount_price
       }
     }
+    customer_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
 `

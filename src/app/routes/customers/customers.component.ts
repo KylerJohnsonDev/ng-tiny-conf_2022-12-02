@@ -6,9 +6,23 @@ import { CustomersEffects } from './customers-feature-state/customers.effects';
 import { customersReducer, CustomersState, CUSTOMERS_FEATURE_KEY } from './customers-feature-state/customers.reducer';
 import { CustomersService } from './customers-feature-state/customers.service';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LetModule } from '@ngrx/component';
-import { CustomersViewModel, selectVM } from './customers.selectors';
 import { Observable } from 'rxjs';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { customersPageActions } from './customers-feature-state/customers.actions';
+import { customersSelectors } from './customers-feature-state/customers.selectors';
+import { Customer } from 'src/app/shared/models';
+
+export interface CustomersViewModel {
+  customers: Customer[];
+  loading: boolean;
+  limit: number;
+  offset: number;
+  pageIndex: number;
+  totalCount: number;
+  error: null | string;
+}
 
 @Component({
   selector: 'app-customers',
@@ -18,10 +32,16 @@ import { Observable } from 'rxjs';
 export class CustomersComponent {
   vm$: Observable<CustomersViewModel>;
 
-  displayedColumns = ['id', 'first_name', 'last_name', 'username','email', 'phone', 'orders']
+  displayedColumns = ['id', 'first_name', 'last_name', 'username','email', 'phone', 'orders'];
+  pageSizeOptions = [5,10,20]
 
   constructor(private store: Store<CustomersState>) {
-    this.vm$ = this.store.select(selectVM);
+    this.vm$ = this.store.select(customersSelectors.selectState);
+  }
+
+  onPageEvent(event: PageEvent): void {
+    const { pageIndex, pageSize } = event;
+    return this.store.dispatch(customersPageActions.paginateCustomers({ pageIndex, pageSize }));
   }
 }
 
@@ -29,6 +49,8 @@ export class CustomersComponent {
   imports: [
     CommonModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
     LetModule,
     StoreModule.forFeature(CUSTOMERS_FEATURE_KEY, customersReducer),
     EffectsModule.forFeature(CustomersEffects)

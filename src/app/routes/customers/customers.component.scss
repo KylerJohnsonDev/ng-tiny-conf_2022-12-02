@@ -1,0 +1,23 @@
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.spinner-container {
+  min-height: 317px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;;
+}
+
+table {
+  border-bottom: 1px solid lightgray;
+  height: 317px;
+  overflow: auto;
+}
+
+.loading-table {
+  display: none;
+}

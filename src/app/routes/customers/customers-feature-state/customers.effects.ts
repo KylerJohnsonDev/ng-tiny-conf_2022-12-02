@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, concatLatestFrom, createEffect, ofType, OnInitEffects } from "@ngrx/effects";
 import { Action, Store } from "@ngrx/store";
 import { catchError, map, of, switchMap } from "rxjs";
-import { customersEffectsActions } from "./customers.actions";
+import { customersEffectsActions, customersPageActions } from "./customers.actions";
 import { CustomersState } from "./customers.reducer";
 import { customersSelectors } from "./customers.selectors";
 import { CustomersService } from "./customers.service";
@@ -12,17 +12,16 @@ import { CustomersService } from "./customers.service";
 export class CustomersEffects implements OnInitEffects {
 
   ngrxOnInitEffects(): Action {
-    console.log('onInitEffects')
-    return customersEffectsActions.loadCustomers()
+   return customersEffectsActions.loadCustomers()
   }
 
   loadCustomers$ = createEffect(() => {
     return this.actions$.pipe(
-        ofType(customersEffectsActions.loadCustomers),
+        ofType(customersEffectsActions.loadCustomers, customersPageActions.paginateCustomers),
         concatLatestFrom(() => this.store.select(customersSelectors.selectPaginationInfo)),
         switchMap(([, paginationInfo]) =>
         this.customersService.loadCustomers(paginationInfo).pipe(
-          map(customers => customersEffectsActions.loadCustomersSuccess({ customers })),
+          map(payload => customersEffectsActions.loadCustomersSuccess({ payload })),
           catchError(error => of(customersEffectsActions.loadCustomersFailure({ error }))))
         ),
     );

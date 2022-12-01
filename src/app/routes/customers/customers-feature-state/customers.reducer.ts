@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { Customer } from "src/app/shared/models";
-import { customersEffectsActions } from "./customers.actions";
+import { customersEffectsActions, customersPageActions } from "./customers.actions";
 
 export const CUSTOMERS_FEATURE_KEY = 'Customers';
 
@@ -10,7 +10,8 @@ export interface CustomersState extends EntityState<Customer> {
   error: string | null;
   limit: number;
   offset: number;
-  pageNumber: number;
+  pageIndex: number;
+  totalCount: number;
 }
 
 export const customersAdapter = createEntityAdapter<Customer>();
@@ -18,9 +19,10 @@ export const customersAdapter = createEntityAdapter<Customer>();
 const initialState: CustomersState = customersAdapter.getInitialState({
   loading: false,
   error: null,
-  limit: 10,
+  limit: 5,
   offset: 0,
-  pageNumber: 1
+  pageIndex: 0,
+  totalCount: 0
 })
 
 export const customersReducer = createReducer(
@@ -28,9 +30,10 @@ export const customersReducer = createReducer(
 
   on(customersEffectsActions.loadCustomers, (state) => ({ ...state, loading: true })),
 
-  on(customersEffectsActions.loadCustomersSuccess, (state, { customers }) => {
-    return customersAdapter.setAll(customers, {
+  on(customersEffectsActions.loadCustomersSuccess, (state, { payload }) => {
+    return customersAdapter.setAll(payload.customer, {
       ...state,
+      totalCount: payload.customer_aggregate.aggregate.count,
       loading: false,
       error: null
     })
@@ -40,5 +43,16 @@ export const customersReducer = createReducer(
     ...state,
     error: error.message,
     loading: false
-  }))
+  })),
+
+  on(customersPageActions.paginateCustomers, (state, { pageIndex, pageSize }) => {
+    const offset = state.limit * pageIndex;
+    return {
+      ...state,
+      loading: true,
+      pageIndex,
+      offset,
+      limit: pageSize
+    }
+  })
 )

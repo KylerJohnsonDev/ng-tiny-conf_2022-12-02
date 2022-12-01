@@ -1,7 +1,12 @@
-
+export interface CustomerAggregate {
+  aggregate: {
+    count: number;
+  }
+}
 
 export interface CustomerPayload {
   customer: Customer[];
+  customer_aggregate: CustomerAggregate
 }
 
 export interface Customer {
