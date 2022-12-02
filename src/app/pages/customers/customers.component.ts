@@ -4,9 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import { CustomersEffects } from './customers-feature-state/customers.effects';
 import {
-  customersReducer,
+  customersFeature,
   CustomersState,
-  CUSTOMERS_FEATURE_KEY,
 } from './customers-feature-state/customers.reducer';
 import { CustomersService } from './customers-feature-state/customers.service';
 import { MatTableModule } from '@angular/material/table';
@@ -57,7 +56,7 @@ export class CustomersComponent {
     MatPaginatorModule,
     CustomersTableComponent,
     MatProgressSpinnerModule,
-    StoreModule.forFeature(CUSTOMERS_FEATURE_KEY, customersReducer),
+    StoreModule.forFeature(customersFeature),
     EffectsModule.forFeature(CustomersEffects),
   ],
   declarations: [CustomersComponent],
