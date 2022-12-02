@@ -1,27 +1,25 @@
-# NgCrm
+# Angular Tiny Conf - 2 DEC 2022
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.1.
 
-## Development server
+Watch the conference here => https://www.youtube.com/watch?v=M65J8pSqU14
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+There are three branches:
 
-## Code scaffolding
+1. main
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- this branch shows the typical NgRx setup you're probably familiar with using create functions (e.g. `createAction`, `createSelectors`)
+- module-based, SCAM (Single Component Angular Module) architecture
 
-## Build
+2. new-apis
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- this branch shows the implementation of the of the `createActionGroup` and `createFeature` APIs
+- module-based
 
-## Running unit tests
+3. standalone
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- this branch shows what NgRx looks like in the new standalone architecture
+- registers root store with `provideStore`
+- registers feature store using route-based providers and the `provideState` and `provideEffects` APIs
+- shows how to bootstrap your `AppComponent` instead of `AppModule`
+- Use functional interceptor and register it with `provideHttpClient()` and the `withInterceptors` APIs
