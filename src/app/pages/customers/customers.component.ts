@@ -30,6 +30,15 @@ export interface CustomersViewModel {
 
 @Component({
   selector: 'app-customers',
+  standalone: true,
+  imports: [
+    LetModule,
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    CustomersTableComponent,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss'],
 })
@@ -47,20 +56,3 @@ export class CustomersComponent {
     );
   }
 }
-
-@NgModule({
-  imports: [
-    LetModule,
-    CommonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    CustomersTableComponent,
-    MatProgressSpinnerModule,
-    StoreModule.forFeature(customersFeature),
-    EffectsModule.forFeature(CustomersEffects),
-  ],
-  declarations: [CustomersComponent],
-  exports: [CustomersComponent],
-  providers: [CustomersService],
-})
-export class CustomersModule {}
